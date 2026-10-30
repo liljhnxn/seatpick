@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="seatGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="#111216" />
+  <rect x="1" y="1" width="30" height="30" rx="7" fill="none" stroke="url(#seatGradient)" stroke-width="1.5" />
+  <!-- Stylized Armchair Icon -->
+  <path d="M10 11a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v7h-12v-7z" fill="#8b5cf6" opacity="0.9" />
+  <rect x="8" y="18" width="16" height="4" rx="1.5" fill="#10b981" />
+  <path d="M7 14a1.5 1.5 0 0 1 1.5-1.5h.5v6.5h-1a1 1 0 0 1-1-1v-4z" fill="#7c3aed" />
+  <path d="M23 12.5h.5a1.5 1.5 0 0 1 1.5 1.5v4a1 1 0 0 1-1 1h-1v-6.5z" fill="#7c3aed" />
+  <rect x="9" y="22" width="2" height="3" rx="0.5" fill="#52576b" />
+  <rect x="21" y="22" width="2" height="3" rx="0.5" fill="#52576b" />
+</svg>
+
