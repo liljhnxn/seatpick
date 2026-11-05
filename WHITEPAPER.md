@@ -1,12 +1,13 @@
 # SeatPick: Decentralized Seat Reservation Protocol
-**A Minimalist, On-Chain Room Booking Architecture on Botchain**
+**A Minimalist, On-Chain Room Booking Architecture on Botchain Mainnet**
 
 **Author:** SeatPick Team  
-**Network:** Botchain Testnet (Chain ID: 968)  
-**Contract Address:** [`0xff28b5Fe0d5e200313E69C59a1B829D15771B85B`](https://scan.bohr.life/address/0xff28b5Fe0d5e200313E69C59a1B829D15771B85B)  
-**Verified Source Code:** [BohrScan Explorer](https://scan.bohr.life/address/0xff28b5Fe0d5e200313E69C59a1B829D15771B85B#code)  
+**Network:** Botchain Mainnet (Chain ID: 677)  
+**Contract Address:** [`0x60640a4A8C335dffF0db4C7b7BAad8419187ef99`](https://scan.botchain.ai/address/0x60640a4A8C335dffF0db4C7b7BAad8419187ef99)  
+**Verified Source Code:** [BotchainScan Explorer](https://scan.botchain.ai/address/0x60640a4A8C335dffF0db4C7b7BAad8419187ef99#code)  
 **GitHub Repository:** [https://github.com/liljhnxn/seatpick](https://github.com/liljhnxn/seatpick)  
-**Version:** 1.0.0 — November 2026
+**Native Token:** BOT (150 Million Total Supply)  
+**Version:** 2.0.0 — November 2026
 
 ---
 
@@ -14,7 +15,7 @@
 
 Traditional ticketing and physical space reservation systems rely heavily on centralized databases, intermediaries, and opaque booking engines. These platforms suffer from double bookings, database downtime, hidden surcharges, non-transparent inventory, and arbitrary cancellations.
 
-**SeatPick** introduces a decentralized, trustless solution for reserving physical and virtual spaces directly on the blockchain. Built natively for the **Botchain** ecosystem, SeatPick eliminates off-chain backends and proprietary databases. Every reservation is verified, recorded, and enforced through an immutable Solidity smart contract, ensuring public transparency, zero double-booking, and cryptographically verified ownership.
+**SeatPick** introduces a decentralized, trustless solution for reserving physical and virtual spaces directly on the blockchain. Deployed natively on **Botchain Mainnet**, SeatPick eliminates off-chain backends and proprietary databases. Every reservation is verified, recorded, and enforced through an immutable Solidity smart contract, ensuring public transparency, zero double-booking, and cryptographically verified ownership.
 
 ---
 
@@ -36,14 +37,15 @@ SeatPick addresses these challenges by making the blockchain the single source o
 - **Immutable On-Chain State**: Seat ownership is stored in a public contract state mapping. Once claimed, a seat cannot be reallocated or overwritten.
 - **Trustless Ownership Rights**: Only the private key corresponding to the reserver's address can initiate a cancellation (`cancelReservation`).
 - **Mathematical Scarcity**: The smart contract hardcodes a strict bound of 20 seats (numbered 1–20). Requests outside this boundary are rejected at the EVM opcode level.
-- **Direct Web3 Connectivity**: The client interface connects directly to Botchain RPC (`https://rpc.bohr.life`) via Viem and Wagmi, bypassing intermediary backends.
+- **Ultra-Low Cost Overhead**: The contract deployment cost on Botchain Mainnet was only **0.0069 BOT**, guaranteeing accessible, micro-fraction gas costs for end users.
+- **Direct Web3 Connectivity**: The client interface connects directly to Botchain Mainnet RPC (`https://rpc.botchain.ai`) via Viem and Wagmi, bypassing intermediary backends.
 
 ---
 
 ## 4. Technical Architecture
 
 ### 4.1 Smart Contract Layer (`SeatPick.sol`)
-The contract is written in Solidity `^0.8.20` with 200 optimizer runs, audited via automated test suites.
+The contract is written in Solidity `^0.8.20` with 200 optimizer runs, verified on-chain.
 
 ```solidity
 contract SeatPick {
@@ -78,15 +80,18 @@ contract SeatPick {
 
 ---
 
-## 5. Network Specifications
+## 5. Mainnet Specifications
 
 | Parameter | Configuration |
 | :--- | :--- |
-| **Network** | Botchain Testnet |
-| **Chain ID** | `968` |
-| **RPC Endpoint** | `https://rpc.bohr.life` |
-| **Explorer** | `https://scan.bohr.life` |
-| **Contract Address** | `0xff28b5Fe0d5e200313E69C59a1B829D15771B85B` |
+| **Network** | Botchain Mainnet |
+| **Chain ID** | `677` |
+| **RPC Endpoint** | `https://rpc.botchain.ai` |
+| **Native Token** | BOT (150M Total Supply) |
+| **Explorer** | `https://scan.botchain.ai` |
+| **Contract Address** | `0x60640a4A8C335dffF0db4C7b7BAad8419187ef99` |
+| **Deployment TX** | `0xbac8eedbbdb8ecb97d97575b6d8a6ee5b57c2d824715f3d1632ec33a06f00012` |
+| **Gas Cost** | `0.0069088 BOT` |
 
 ---
 
@@ -101,13 +106,13 @@ contract SeatPick {
 
 ## 7. Roadmap
 
-- **Phase 1 (Completed)**: Core smart contract implementation, unit testing (11/11 passing tests), Botchain Testnet deployment, contract verification, responsive Next.js dApp.
-- **Phase 2 (Current)**: Ecosystem integration with Botchain community, social showcase, and mobile wallet optimizations.
+- **Phase 1 (Completed)**: Core smart contract implementation, unit testing (11/11 passing tests), Botchain Testnet deployment, contract verification.
+- **Phase 2 (Completed)**: **Botchain Mainnet Deployment & Verification** (Chain ID 677, address `0x60640a4A8C335dffF0db4C7b7BAad8419187ef99`).
 - **Phase 3 (Next)**: ERC-721 ticket integration (turning active reservations into tradable pass NFTs), dynamic multi-room layouts, time-based expiration slots.
-- **Phase 4**: Deployment on Botchain Mainnet.
+- **Phase 4**: Native Botchain ecosystem partnership integrations.
 
 ---
 
 ## 8. Conclusion
 
-SeatPick demonstrates how lightweight smart contracts and reactive Web3 frontends can replace monolithic, rent-seeking reservation architectures. By leveraging Botchain's high throughput and low fees, SeatPick provides users with a fast, transparent, and immutable booking experience.
+SeatPick demonstrates how lightweight smart contracts and reactive Web3 frontends can replace monolithic, rent-seeking reservation architectures. By leveraging Botchain's high throughput and low fees, SeatPick provides users with a fast, transparent, and immutable booking experience on mainnet.

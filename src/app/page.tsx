@@ -13,7 +13,7 @@ import { StatsCard } from "@/components/StatsCard";
 import { SeatCard, SeatData } from "@/components/SeatCard";
 import { SeatModal } from "@/components/SeatModal";
 import { CONTRACT_ADDRESS, SEATPICK_ABI } from "@/config/contract";
-import { botchainTestnet } from "@/config/chain";
+import { botchainMainnet } from "@/config/chain";
 import {
   Armchair,
   RefreshCw,
@@ -194,9 +194,9 @@ export default function Home() {
           <div>
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-charcoal-800 border border-charcoal-700 text-xs text-gray-300 mb-3">
               <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
-              <span>Live on Botchain Testnet</span>
+              <span>Live on Botchain Mainnet</span>
               <span className="text-gray-500">•</span>
-              <span className="font-mono text-gray-400">Chain ID: 968</span>
+              <span className="font-mono text-gray-400">Chain ID: 677</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
               Room Reservation
@@ -220,7 +220,7 @@ export default function Home() {
               <span>{isRefetching ? "Refreshing..." : "Refresh Status"}</span>
             </button>
             <a
-              href="https://scan.bohr.life"
+              href="https://scan.botchain.ai"
               target="_blank"
               rel="noreferrer"
               className="hidden sm:flex items-center space-x-1 px-3.5 py-2 rounded-xl text-xs font-semibold bg-charcoal-850 border border-charcoal-700 hover:border-charcoal-600 text-gray-400 hover:text-gray-200 transition-all"
@@ -304,18 +304,18 @@ export default function Home() {
           <div className="space-y-1.5">
             <p className="font-semibold text-gray-200 flex items-center gap-1.5">
               <Info className="w-4 h-4 text-brand-purple-light" />
-              Botchain Testnet
+              Botchain Mainnet
             </p>
             <p className="leading-relaxed">
-              Operating on RPC <span className="text-gray-300 font-mono">https://rpc.bohr.life</span> with
-              Chain ID 968. Explorer accessible at{" "}
+              Operating on RPC <span className="text-gray-300 font-mono">https://rpc.botchain.ai</span> with
+              Chain ID 677. Explorer accessible at{" "}
               <a
-                href="https://scan.bohr.life"
+                href="https://scan.botchain.ai"
                 target="_blank"
                 rel="noreferrer"
                 className="underline hover:text-white"
               >
-                scan.bohr.life
+                scan.botchain.ai
               </a>.
             </p>
           </div>

@@ -2,9 +2,9 @@
 
 import React from "react";
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
-import { botchainTestnet } from "@/config/chain";
+import { botchainMainnet } from "@/config/chain";
 import { shortenAddress } from "@/utils/format";
-import { Wallet, LogOut, AlertTriangle, ShieldCheck } from "lucide-react";
+import { Wallet, LogOut, AlertTriangle } from "lucide-react";
 
 export function Header() {
   const { address, isConnected, chainId } = useAccount();
@@ -12,7 +12,7 @@ export function Header() {
   const { disconnect } = useDisconnect();
   const { switchChain, isPending: isSwitching } = useSwitchChain();
 
-  const isWrongNetwork = isConnected && chainId !== botchainTestnet.id;
+  const isWrongNetwork = isConnected && chainId !== botchainMainnet.id;
 
   const handleConnect = () => {
     const metaMaskConnector =
@@ -51,12 +51,12 @@ export function Header() {
         <div className="flex items-center space-x-3">
           {isConnected && isWrongNetwork && (
             <button
-              onClick={() => switchChain({ chainId: botchainTestnet.id })}
+              onClick={() => switchChain({ chainId: botchainMainnet.id })}
               disabled={isSwitching}
               className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/30 hover:bg-amber-500/20 transition-all"
             >
               <AlertTriangle className="w-3.5 h-3.5" />
-              <span>{isSwitching ? "Switching..." : "Switch to Botchain"}</span>
+              <span>{isSwitching ? "Switching..." : "Switch to Botchain Mainnet"}</span>
             </button>
           )}
 
@@ -76,7 +76,7 @@ export function Header() {
                   className={`w-2 h-2 rounded-full ${
                     isWrongNetwork ? "bg-amber-400 animate-ping" : "bg-brand-green"
                   }`}
-                  title={isWrongNetwork ? "Wrong Network" : "Connected to Botchain Testnet"}
+                  title={isWrongNetwork ? "Wrong Network" : "Connected to Botchain Mainnet"}
                 />
                 <span className="text-xs font-mono font-medium text-gray-200">
                   {shortenAddress(address)}
@@ -96,4 +96,3 @@ export function Header() {
     </header>
   );
 }
-

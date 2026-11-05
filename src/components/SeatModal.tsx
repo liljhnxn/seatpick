@@ -101,7 +101,7 @@ export function SeatModal({
               </span>
             </h3>
             <p className="text-xs text-gray-400">
-              Botchain Testnet (Chain ID 968)
+              Botchain Mainnet (Chain ID 677)
             </p>
           </div>
         </div>
@@ -122,7 +122,7 @@ export function SeatModal({
 
               {txHash && (
                 <a
-                  href={`https://scan.bohr.life/tx/${txHash}`}
+                  href={`https://scan.botchain.ai/tx/${txHash}`}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center space-x-1.5 text-xs text-brand-green-light hover:underline font-mono"
@@ -180,13 +180,13 @@ export function SeatModal({
                 <p className="text-xs text-gray-400 mt-1">
                   {isPending
                     ? "Please sign the transaction prompt in your wallet."
-                    : "Waiting for block confirmation on Botchain Testnet."}
+                    : "Waiting for block confirmation on Botchain Mainnet."}
                 </p>
               </div>
 
               {txHash && (
                 <a
-                  href={`https://scan.bohr.life/tx/${txHash}`}
+                  href={`https://scan.botchain.ai/tx/${txHash}`}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center space-x-1 text-xs text-brand-purple-light hover:underline font-mono"
@@ -238,7 +238,7 @@ export function SeatModal({
                   <ShieldCheck className="w-4 h-4 flex-shrink-0 mt-0.5" />
                   <span>
                     Confirming will permanently link Seat #{seat.id} to your wallet address
-                    on the Botchain Testnet until cancelled.
+                    on Botchain Mainnet until cancelled.
                   </span>
                 </div>
               )}

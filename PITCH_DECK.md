@@ -1,7 +1,7 @@
 # SeatPick — Pitch Deck
 
 > **"Pick your spot. Make it yours."**  
-> *A decentralized, transparent seat reservation protocol on Botchain.*
+> *A decentralized, transparent seat reservation protocol on Botchain Mainnet.*
 
 ---
 
@@ -9,8 +9,10 @@
 - **Project Name:** SeatPick
 - **Tagline:** Pick your spot. Make it yours.
 - **Mission:** Replacing opaque, centralized reservation platforms with trustless, on-chain seat booking.
-- **Network:** Botchain Testnet (Chain ID 968)
-- **Live Contract:** `0xff28b5Fe0d5e200313E69C59a1B829D15771B85B`
+- **Network:** Botchain Mainnet (Chain ID 677)
+- **Live Contract:** `0x60640a4A8C335dffF0db4C7b7BAad8419187ef99`
+- **Native Token:** BOT (150M Supply)
+- **Explorer:** [https://scan.botchain.ai/address/0x60640a4A8C335dffF0db4C7b7BAad8419187ef99#code](https://scan.botchain.ai/address/0x60640a4A8C335dffF0db4C7b7BAad8419187ef99#code)
 - **GitHub:** [https://github.com/liljhnxn/seatpick](https://github.com/liljhnxn/seatpick)
 
 ---
@@ -24,10 +26,11 @@
 ---
 
 ## Slide 3: The Solution — SeatPick
-- **100% On-Chain Logic:** Every reservation is immutably recorded directly on Botchain Testnet.
+- **100% On-Chain Logic:** Every reservation is immutably recorded directly on Botchain Mainnet.
 - **Cryptographic Ownership:** Only the wallet that reserved a seat holds the key to cancel it.
 - **Guaranteed Scarcity:** Mathematically bounded 20 seats (1–20) governed by EVM smart contract logic.
 - **Zero-Backend Stack:** Pure client-to-blockchain dApp—zero server downtime, zero database costs.
+- **Micro Gas Overhead:** Optimized contract deployment cost was only ~0.0069 BOT.
 
 ---
 
@@ -47,7 +50,7 @@
 - **Quality Assurance:** 100% automated test coverage (11 unit tests covering edge cases, boundaries, and unauthorized cancellations).
 - **Web3 Layer:** Viem & Wagmi v2 for injected MetaMask connectivity.
 - **Frontend:** Next.js 14 App Router, TypeScript, Tailwind CSS, Lucide Icons.
-- **Security:** Verified on [BohrScan Explorer](https://scan.bohr.life/address/0xff28b5Fe0d5e200313E69C59a1B829D15771B85B#code).
+- **Security & Status:** Verified on [BotchainScan Explorer](https://scan.botchain.ai/address/0x60640a4A8C335dffF0db4C7b7BAad8419187ef99#code).
 
 ---
 
@@ -60,16 +63,16 @@
 ---
 
 ## Slide 7: Roadmap
-- **Q4 2026 (Completed):**
+- **Phase 1 (Completed):**
   - Smart contract architecture & 11/11 automated tests passed.
-  - Contract deployed & verified on Botchain Testnet.
-  - Next.js responsive dApp with real-time event updates.
-- **Q1 2027 (Upcoming):**
+  - Botchain Testnet deployment and verification.
+- **Phase 2 (Completed):**
+  - **Botchain Mainnet Deployment & Contract Verification** (`0x60640a4A8C335dffF0db4C7b7BAad8419187ef99`).
+  - Next.js responsive dApp configured for Mainnet with live event sync.
+- **Phase 3 (Upcoming):**
   - NFT Pass Generation: Mint reservations as ERC-721 digital collectibles/tickets.
   - Time-locked booking slots & automated seat release timers.
   - Expansion to multiple custom rooms and auditoriums.
-- **Q2 2027:**
-  - Botchain Mainnet deployment and ecosystem cross-integrations.
 
 ---
 
@@ -82,5 +85,5 @@
 
 ### Contact & Links
 - **GitHub:** [https://github.com/liljhnxn/seatpick](https://github.com/liljhnxn/seatpick)
-- **Explorer:** [https://scan.bohr.life/address/0xff28b5Fe0d5e200313E69C59a1B829D15771B85B#code](https://scan.bohr.life/address/0xff28b5Fe0d5e200313E69C59a1B829D15771B85B#code)
-- **Network:** Botchain Testnet (Chain ID 968)
+- **Explorer:** [https://scan.botchain.ai/address/0x60640a4A8C335dffF0db4C7b7BAad8419187ef99#code](https://scan.botchain.ai/address/0x60640a4A8C335dffF0db4C7b7BAad8419187ef99#code)
+- **Network:** Botchain Mainnet (Chain ID 677)
