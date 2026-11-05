@@ -106,7 +106,7 @@ contract SeatPick {
 
 ## 7. Roadmap
 
-- **Phase 1 (Completed)**: Core smart contract implementation, unit testing (11/11 passing tests), Botchain Testnet deployment, contract verification.
+- **Phase 1 (Completed)**: Core smart contract implementation, unit testing (11/11 passing tests), initial contract verification.
 - **Phase 2 (Completed)**: **Botchain Mainnet Deployment & Verification** (Chain ID 677, address `0x60640a4A8C335dffF0db4C7b7BAad8419187ef99`).
 - **Phase 3 (Next)**: ERC-721 ticket integration (turning active reservations into tradable pass NFTs), dynamic multi-room layouts, time-based expiration slots.
 - **Phase 4**: Native Botchain ecosystem partnership integrations.

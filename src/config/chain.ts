@@ -8,7 +8,7 @@ import { defineChain } from "viem";
  * Native Token: BOT
  * Block Explorer: https://scan.botchain.ai
  */
-export const botchainMainnet = defineChain({
+export const botchain = defineChain({
   id: 677,
   name: "Botchain Mainnet",
   nativeCurrency: {
@@ -30,31 +30,4 @@ export const botchainMainnet = defineChain({
         process.env.NEXT_PUBLIC_BOTCHAIN_EXPLORER_URL || "https://scan.botchain.ai",
     },
   },
-  testnet: false,
-});
-
-/**
- * Botchain Testnet specification:
- * Chain ID: 968
- */
-export const botchainTestnet = defineChain({
-  id: 968,
-  name: "Botchain Testnet",
-  nativeCurrency: {
-    name: "Botchain",
-    symbol: "BOT",
-    decimals: 18,
-  },
-  rpcUrls: {
-    default: {
-      http: ["https://rpc.bohr.life"],
-    },
-  },
-  blockExplorers: {
-    default: {
-      name: "BohrScan",
-      url: "https://scan.bohr.life",
-    },
-  },
-  testnet: true,
 });

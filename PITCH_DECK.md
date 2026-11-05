@@ -65,7 +65,7 @@
 ## Slide 7: Roadmap
 - **Phase 1 (Completed):**
   - Smart contract architecture & 11/11 automated tests passed.
-  - Botchain Testnet deployment and verification.
+  - Initial deployment and contract verification.
 - **Phase 2 (Completed):**
   - **Botchain Mainnet Deployment & Contract Verification** (`0x60640a4A8C335dffF0db4C7b7BAad8419187ef99`).
   - Next.js responsive dApp configured for Mainnet with live event sync.

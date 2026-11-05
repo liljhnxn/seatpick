@@ -2,9 +2,9 @@
 
 import React from "react";
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
-import { botchainMainnet } from "@/config/chain";
+import { botchain } from "@/config/chain";
 import { shortenAddress } from "@/utils/format";
-import { Wallet, LogOut, AlertTriangle } from "lucide-react";
+import { Wallet, LogOut, AlertTriangle, ExternalLink } from "lucide-react";
 
 export function Header() {
   const { address, isConnected, chainId } = useAccount();
@@ -12,7 +12,7 @@ export function Header() {
   const { disconnect } = useDisconnect();
   const { switchChain, isPending: isSwitching } = useSwitchChain();
 
-  const isWrongNetwork = isConnected && chainId !== botchainMainnet.id;
+  const isWrongNetwork = isConnected && chainId !== botchain.id;
 
   const handleConnect = () => {
     const metaMaskConnector =
@@ -37,8 +37,8 @@ export function Header() {
             </div>
             <span className="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
               Seat<span className="text-brand-purple-light">Pick</span>
-              <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-charcoal-800 text-gray-400 border border-charcoal-700">
-                Web3
+              <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-charcoal-800 text-brand-green border border-brand-green/30">
+                BOT Chain
               </span>
             </span>
           </div>
@@ -47,16 +47,28 @@ export function Header() {
           </p>
         </div>
 
-        {/* Wallet Connection Controls */}
+        {/* Navigation links & Wallet Connection */}
         <div className="flex items-center space-x-3">
+          {/* Mainnet Explorer link on header */}
+          <a
+            href="https://scan.botchain.ai"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden md:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-gray-300 hover:text-white bg-charcoal-800 border border-charcoal-700 hover:border-charcoal-600 transition-all"
+            title="Open BOT Chain Explorer"
+          >
+            <span>Explorer</span>
+            <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
+          </a>
+
           {isConnected && isWrongNetwork && (
             <button
-              onClick={() => switchChain({ chainId: botchainMainnet.id })}
+              onClick={() => switchChain({ chainId: botchain.id })}
               disabled={isSwitching}
-              className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/30 hover:bg-amber-500/20 transition-all"
+              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/30 hover:bg-amber-500/20 transition-all"
             >
               <AlertTriangle className="w-3.5 h-3.5" />
-              <span>{isSwitching ? "Switching..." : "Switch to Botchain Mainnet"}</span>
+              <span>{isSwitching ? "Switching..." : "Switch to BOT Chain"}</span>
             </button>
           )}
 
@@ -76,7 +88,7 @@ export function Header() {
                   className={`w-2 h-2 rounded-full ${
                     isWrongNetwork ? "bg-amber-400 animate-ping" : "bg-brand-green"
                   }`}
-                  title={isWrongNetwork ? "Wrong Network" : "Connected to Botchain Mainnet"}
+                  title={isWrongNetwork ? "Wrong Network" : "Connected to BOT Chain"}
                 />
                 <span className="text-xs font-mono font-medium text-gray-200">
                   {shortenAddress(address)}

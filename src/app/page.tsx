@@ -13,7 +13,7 @@ import { StatsCard } from "@/components/StatsCard";
 import { SeatCard, SeatData } from "@/components/SeatCard";
 import { SeatModal } from "@/components/SeatModal";
 import { CONTRACT_ADDRESS, SEATPICK_ABI } from "@/config/contract";
-import { botchainMainnet } from "@/config/chain";
+import { botchain } from "@/config/chain";
 import {
   Armchair,
   RefreshCw,
@@ -22,11 +22,14 @@ import {
   ShieldCheck,
   AlertCircle,
   HelpCircle,
+  Globe,
+  Coins,
+  Cpu,
 } from "lucide-react";
 import { zeroAddress } from "viem";
 
 export default function Home() {
-  const { address, isConnected, chainId } = useAccount();
+  const { address, isConnected } = useAccount();
   const [selectedSeat, setSelectedSeat] = useState<SeatData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -37,7 +40,6 @@ export default function Home() {
   // Read all 20 seats directly from blockchain
   const {
     data: seatOwnersData,
-    isLoading: isLoadingSeats,
     refetch: refetchSeats,
     isRefetching,
   } = useReadContract({
@@ -45,7 +47,7 @@ export default function Home() {
     abi: SEATPICK_ABI,
     functionName: "getAllSeats",
     query: {
-      enabled: isContractConfigured,
+      enabled: Boolean(isContractConfigured),
       refetchInterval: 10_000, // Background refresh every 10s
     },
   });
@@ -179,9 +181,9 @@ export default function Home() {
                 Contract Address Not Configured
               </p>
               <p className="text-amber-200/90">
-                Deploy the SeatPick contract to Botchain Testnet using{" "}
+                Deploy the SeatPick contract to BOT Chain using{" "}
                 <code className="bg-charcoal-850 px-1.5 py-0.5 rounded text-amber-300 font-mono">
-                  npm run deploy:testnet
+                  npm run deploy:mainnet
                 </code>{" "}
                 and set <code className="bg-charcoal-850 px-1.5 py-0.5 rounded text-amber-300 font-mono">NEXT_PUBLIC_CONTRACT_ADDRESS</code> in <code className="bg-charcoal-850 px-1.5 py-0.5 rounded text-amber-300 font-mono">.env.local</code>.
               </p>
@@ -194,7 +196,7 @@ export default function Home() {
           <div>
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-charcoal-800 border border-charcoal-700 text-xs text-gray-300 mb-3">
               <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
-              <span>Live on Botchain Mainnet</span>
+              <span className="font-semibold text-white">Live on BOT Chain</span>
               <span className="text-gray-500">•</span>
               <span className="font-mono text-gray-400">Chain ID: 677</span>
             </div>
@@ -203,7 +205,7 @@ export default function Home() {
             </h1>
             <p className="text-sm sm:text-base text-gray-400 mt-1 max-w-xl">
               Select any open seat to record your reservation directly onto the
-              blockchain. Verified and secured by smart contracts.
+              blockchain. Verified and secured by immutable smart contracts.
             </p>
           </div>
 
@@ -223,9 +225,9 @@ export default function Home() {
               href="https://scan.botchain.ai"
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:flex items-center space-x-1 px-3.5 py-2 rounded-xl text-xs font-semibold bg-charcoal-850 border border-charcoal-700 hover:border-charcoal-600 text-gray-400 hover:text-gray-200 transition-all"
+              className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-charcoal-850 border border-charcoal-700 hover:border-charcoal-600 text-brand-green-light hover:text-white transition-all shadow-sm"
             >
-              <span>Explorer</span>
+              <span>BOT Chain Explorer</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -274,7 +276,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* 20 Seats Grid Layout (4 rows x 5 columns or responsive) */}
+          {/* 20 Seats Grid Layout */}
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-3.5 sm:gap-4 pt-2">
             {seats.map((seat) => (
               <SeatCard
@@ -288,49 +290,92 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Bottom Help / Contract info */}
-        <div className="border-t border-charcoal-800 pt-8 mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-gray-400">
-          <div className="space-y-1.5">
-            <p className="font-semibold text-gray-200 flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-brand-green" />
-              Decentralized Ownership
-            </p>
-            <p className="leading-relaxed">
-              Every seat is enforced by an immutable Solidity smart contract.
-              Reservations can only be cancelled by the address that made them.
-            </p>
-          </div>
+        {/* BOT Chain Ecosystem Section */}
+        <section className="border border-charcoal-700/80 bg-charcoal-900/60 rounded-3xl p-6 sm:p-8 backdrop-blur-sm mt-12 relative overflow-hidden">
+          <div className="absolute -right-20 -top-20 w-60 h-60 bg-gradient-to-br from-brand-purple/10 to-brand-green/10 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-charcoal-800 pb-6 mb-6">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-purple to-brand-green p-[1px] flex items-center justify-center shadow-lg shadow-purple-950/40">
+                <div className="w-full h-full bg-charcoal-900 rounded-[15px] flex items-center justify-center">
+                  <Cpu className="w-6 h-6 text-brand-green-light" />
+                </div>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                  Powered by BOT Chain
+                  <span className="text-[10px] font-mono font-semibold uppercase px-2 py-0.5 rounded-full bg-brand-green/10 text-brand-green-light border border-brand-green/30">
+                    Mainnet
+                  </span>
+                </h2>
+                <p className="text-xs text-gray-400 mt-0.5">
+                  Decentralized, high-throughput smart contract infrastructure for Web3 applications
+                </p>
+              </div>
+            </div>
 
-          <div className="space-y-1.5">
-            <p className="font-semibold text-gray-200 flex items-center gap-1.5">
-              <Info className="w-4 h-4 text-brand-purple-light" />
-              Botchain Mainnet
-            </p>
-            <p className="leading-relaxed">
-              Operating on RPC <span className="text-gray-300 font-mono">https://rpc.botchain.ai</span> with
-              Chain ID 677. Explorer accessible at{" "}
+            {/* Official Ecosystem Links */}
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="https://botchain.ai"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold bg-charcoal-800 hover:bg-charcoal-700 border border-charcoal-700 hover:border-gray-500 text-white transition-all shadow-sm"
+              >
+                <Globe className="w-3.5 h-3.5 text-brand-purple-light" />
+                <span>BOT Chain Website</span>
+                <ExternalLink className="w-3 h-3 text-gray-400" />
+              </a>
+
               <a
                 href="https://scan.botchain.ai"
                 target="_blank"
                 rel="noreferrer"
-                className="underline hover:text-white"
+                className="flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold bg-charcoal-800 hover:bg-charcoal-700 border border-charcoal-700 hover:border-brand-green/50 text-white transition-all shadow-sm"
               >
-                scan.botchain.ai
-              </a>.
-            </p>
+                <Coins className="w-3.5 h-3.5 text-brand-green" />
+                <span>BOT Chain Explorer</span>
+                <ExternalLink className="w-3 h-3 text-gray-400" />
+              </a>
+            </div>
           </div>
 
-          <div className="space-y-1.5">
-            <p className="font-semibold text-gray-200 flex items-center gap-1.5">
-              <HelpCircle className="w-4 h-4 text-indigo-400" />
-              Public Transparency
-            </p>
-            <p className="leading-relaxed">
-              All reservation statuses and wallet ownerships are read directly
-              from the blockchain in real-time without database intermediaries.
-            </p>
+          {/* Key Architecture Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-gray-400">
+            <div className="space-y-1.5">
+              <p className="font-semibold text-gray-200 flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-brand-green" />
+                Decentralized Ownership
+              </p>
+              <p className="leading-relaxed">
+                Every seat is governed by an immutable Solidity smart contract.
+                Reservations can only be cancelled by the address that made them.
+              </p>
+            </div>
+
+            <div className="space-y-1.5">
+              <p className="font-semibold text-gray-200 flex items-center gap-1.5">
+                <Info className="w-4 h-4 text-brand-purple-light" />
+                BOT Chain Specs
+              </p>
+              <p className="leading-relaxed">
+                Operating on RPC <span className="text-gray-300 font-mono">https://rpc.botchain.ai</span> with
+                Chain ID 677. Native token BOT with 150 Million total supply.
+              </p>
+            </div>
+
+            <div className="space-y-1.5">
+              <p className="font-semibold text-gray-200 flex items-center gap-1.5">
+                <HelpCircle className="w-4 h-4 text-indigo-400" />
+                Public Transparency
+              </p>
+              <p className="leading-relaxed">
+                All reservation statuses and wallet ownerships are queried live
+                from the blockchain in real-time without database intermediaries.
+              </p>
+            </div>
           </div>
-        </div>
+        </section>
       </main>
 
       {/* Confirmation & Status Modal */}
@@ -350,16 +395,66 @@ export default function Home() {
         }}
       />
 
-      {/* Footer */}
-      <footer className="w-full border-t border-charcoal-800 py-6 mt-auto bg-charcoal-950">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
-          <p>© 2026 SeatPick. Built with Next.js, Wagmi & Solidity.</p>
-          <p className="font-mono text-[11px]">
-            Contract: {isContractConfigured ? CONTRACT_ADDRESS : "Not deployed"}
-          </p>
+      {/* Footer with BOT Chain Ecosystem Links */}
+      <footer className="w-full border-t border-charcoal-800 py-8 mt-auto bg-charcoal-900/90">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Brand */}
+            <div className="flex items-center space-x-2">
+              <div className="w-6 h-6 rounded-md bg-gradient-to-br from-brand-purple to-brand-green p-[1px] flex items-center justify-center">
+                <div className="w-full h-full bg-charcoal-900 rounded-[5px] flex items-center justify-center">
+                  <span className="text-white font-bold text-xs">S</span>
+                </div>
+              </div>
+              <span className="text-sm font-bold text-white">SeatPick</span>
+              <span className="text-gray-500 text-xs">|</span>
+              <span className="text-xs text-gray-400">Decentralized Seat Reservations</span>
+            </div>
+
+            {/* Required Ecosystem Links in Footer */}
+            <div className="flex items-center space-x-6 text-xs">
+              <a
+                href="https://botchain.ai"
+                target="_blank"
+                rel="noreferrer"
+                className="text-gray-300 hover:text-white transition-colors flex items-center gap-1 font-medium"
+              >
+                <span>BOT Chain Website</span>
+                <ExternalLink className="w-3 h-3 text-gray-500" />
+              </a>
+
+              <a
+                href="https://scan.botchain.ai"
+                target="_blank"
+                rel="noreferrer"
+                className="text-brand-green-light hover:text-white transition-colors flex items-center gap-1 font-medium"
+              >
+                <span>BOT Chain Explorer</span>
+                <ExternalLink className="w-3 h-3 text-gray-500" />
+              </a>
+
+              {isContractConfigured && (
+                <a
+                  href={`https://scan.botchain.ai/address/${CONTRACT_ADDRESS}#code`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-brand-purple-light hover:text-white transition-colors flex items-center gap-1 font-mono text-[11px]"
+                >
+                  <span>Contract</span>
+                  <ExternalLink className="w-3 h-3 text-gray-500" />
+                </a>
+              )}
+            </div>
+          </div>
+
+          <div className="border-t border-charcoal-800/80 pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-gray-500">
+            <p>© 2026 SeatPick. Built natively on BOT Chain (Chain ID: 677).</p>
+            <p className="font-mono text-[11px] text-gray-400">
+              Contract: {isContractConfigured ? CONTRACT_ADDRESS : "Not configured"}
+            </p>
+          </div>
         </div>
       </footer>
     </div>
   );
 }
-

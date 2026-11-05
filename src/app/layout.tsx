@@ -4,7 +4,7 @@ import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
   title: "SeatPick | Web3 Seat Reservation",
-  description: "Pick your spot. Make it yours. Decentralized seat reservations on Botchain Testnet.",
+  description: "Pick your spot. Make it yours. Decentralized seat reservations on BOT Chain.",
   icons: {
     icon: "/icon.svg",
   },
