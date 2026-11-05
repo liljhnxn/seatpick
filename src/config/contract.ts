@@ -1,7 +1,10 @@
 import { Address } from "viem";
 
+/**
+ * Botchain Mainnet Verified Contract Address
+ */
 export const CONTRACT_ADDRESS: Address = (process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ||
-  "0x0000000000000000000000000000000000000000") as Address;
+  "0x60640a4A8C335dffF0db4C7b7BAad8419187ef99") as Address;
 
 export const SEATPICK_ABI = [
   {
@@ -133,4 +136,3 @@ export const SEATPICK_ABI = [
     type: "event",
   },
 ] as const;
-

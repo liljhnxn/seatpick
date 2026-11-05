@@ -13,18 +13,13 @@ import { StatsCard } from "@/components/StatsCard";
 import { SeatCard, SeatData } from "@/components/SeatCard";
 import { SeatModal } from "@/components/SeatModal";
 import { CONTRACT_ADDRESS, SEATPICK_ABI } from "@/config/contract";
-import { botchain } from "@/config/chain";
 import {
-  Armchair,
   RefreshCw,
   ExternalLink,
   Info,
   ShieldCheck,
-  AlertCircle,
   HelpCircle,
   Globe,
-  Coins,
-  Cpu,
 } from "lucide-react";
 import { zeroAddress } from "viem";
 
@@ -32,10 +27,6 @@ export default function Home() {
   const { address, isConnected } = useAccount();
   const [selectedSeat, setSelectedSeat] = useState<SeatData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const isContractConfigured =
-    CONTRACT_ADDRESS &&
-    CONTRACT_ADDRESS !== "0x0000000000000000000000000000000000000000";
 
   // Read all 20 seats directly from blockchain
   const {
@@ -47,7 +38,6 @@ export default function Home() {
     abi: SEATPICK_ABI,
     functionName: "getAllSeats",
     query: {
-      enabled: Boolean(isContractConfigured),
       refetchInterval: 10_000, // Background refresh every 10s
     },
   });
@@ -172,30 +162,15 @@ export default function Home() {
       <Header />
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
-        {/* Banner if Contract Address is placeholder */}
-        {!isContractConfigured && (
-          <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 flex items-start space-x-3 text-amber-300">
-            <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-amber-400" />
-            <div className="text-xs sm:text-sm space-y-1">
-              <p className="font-semibold text-white">
-                Contract Address Not Configured
-              </p>
-              <p className="text-amber-200/90">
-                Deploy the SeatPick contract to BOT Chain using{" "}
-                <code className="bg-charcoal-850 px-1.5 py-0.5 rounded text-amber-300 font-mono">
-                  npm run deploy:mainnet
-                </code>{" "}
-                and set <code className="bg-charcoal-850 px-1.5 py-0.5 rounded text-amber-300 font-mono">NEXT_PUBLIC_CONTRACT_ADDRESS</code> in <code className="bg-charcoal-850 px-1.5 py-0.5 rounded text-amber-300 font-mono">.env.local</code>.
-              </p>
-            </div>
-          </div>
-        )}
-
         {/* Top Hero / Intro Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-2">
           <div>
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-charcoal-800 border border-charcoal-700 text-xs text-gray-300 mb-3">
-              <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
+              <img
+                src="/botchain-logo.png"
+                alt="BOT Chain Logo"
+                className="w-4 h-4 rounded object-cover"
+              />
               <span className="font-semibold text-white">Live on BOT Chain</span>
               <span className="text-gray-500">•</span>
               <span className="font-mono text-gray-400">Chain ID: 677</span>
@@ -225,8 +200,13 @@ export default function Home() {
               href="https://scan.botchain.ai"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-charcoal-850 border border-charcoal-700 hover:border-charcoal-600 text-brand-green-light hover:text-white transition-all shadow-sm"
+              className="flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-charcoal-850 hover:bg-charcoal-800 border border-charcoal-700 hover:border-brand-green/60 text-brand-green-light hover:text-white transition-all shadow-sm"
             >
+              <img
+                src="/botchain-logo.png"
+                alt="BOT Chain Logo"
+                className="w-4 h-4 rounded object-cover"
+              />
               <span>BOT Chain Explorer</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
@@ -284,7 +264,7 @@ export default function Home() {
                 seat={seat}
                 userAddress={address}
                 onSelect={handleSelectSeat}
-                disabled={!isContractConfigured || isRefetching}
+                disabled={isRefetching}
               />
             ))}
           </div>
@@ -296,10 +276,12 @@ export default function Home() {
           
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-charcoal-800 pb-6 mb-6">
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-purple to-brand-green p-[1px] flex items-center justify-center shadow-lg shadow-purple-950/40">
-                <div className="w-full h-full bg-charcoal-900 rounded-[15px] flex items-center justify-center">
-                  <Cpu className="w-6 h-6 text-brand-green-light" />
-                </div>
+              <div className="w-14 h-14 rounded-2xl bg-charcoal-800 border border-charcoal-700 p-1 flex items-center justify-center shadow-lg shadow-black/60">
+                <img
+                  src="/botchain-logo.png"
+                  alt="BOT Chain Logo"
+                  className="w-full h-full rounded-xl object-cover"
+                />
               </div>
               <div>
                 <h2 className="text-xl font-bold text-white flex items-center gap-2">
@@ -314,28 +296,36 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Official Ecosystem Links */}
+            {/* Official Ecosystem Links with Logo at Front */}
             <div className="flex flex-wrap items-center gap-3">
               <a
                 href="https://botchain.ai"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold bg-charcoal-800 hover:bg-charcoal-700 border border-charcoal-700 hover:border-gray-500 text-white transition-all shadow-sm"
+                className="flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-charcoal-800 hover:bg-charcoal-700 border border-charcoal-700 hover:border-gray-500 text-white transition-all shadow-sm group"
               >
-                <Globe className="w-3.5 h-3.5 text-brand-purple-light" />
+                <img
+                  src="/botchain-logo.png"
+                  alt="BOT Chain Logo"
+                  className="w-4 h-4 rounded object-cover"
+                />
                 <span>BOT Chain Website</span>
-                <ExternalLink className="w-3 h-3 text-gray-400" />
+                <ExternalLink className="w-3 h-3 text-gray-400 group-hover:text-white" />
               </a>
 
               <a
                 href="https://scan.botchain.ai"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold bg-charcoal-800 hover:bg-charcoal-700 border border-charcoal-700 hover:border-brand-green/50 text-white transition-all shadow-sm"
+                className="flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-charcoal-800 hover:bg-charcoal-700 border border-charcoal-700 hover:border-brand-green/50 text-white transition-all shadow-sm group"
               >
-                <Coins className="w-3.5 h-3.5 text-brand-green" />
+                <img
+                  src="/botchain-logo.png"
+                  alt="BOT Chain Logo"
+                  className="w-4 h-4 rounded object-cover"
+                />
                 <span>BOT Chain Explorer</span>
-                <ExternalLink className="w-3 h-3 text-gray-400" />
+                <ExternalLink className="w-3 h-3 text-gray-400 group-hover:text-white" />
               </a>
             </div>
           </div>
@@ -395,7 +385,7 @@ export default function Home() {
         }}
       />
 
-      {/* Footer with BOT Chain Ecosystem Links */}
+      {/* Footer with BOT Chain Ecosystem Links & Logo at Front */}
       <footer className="w-full border-t border-charcoal-800 py-8 mt-auto bg-charcoal-900/90">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -411,14 +401,19 @@ export default function Home() {
               <span className="text-xs text-gray-400">Decentralized Seat Reservations</span>
             </div>
 
-            {/* Required Ecosystem Links in Footer */}
-            <div className="flex items-center space-x-6 text-xs">
+            {/* Ecosystem Links with BOT Chain Logo at Front */}
+            <div className="flex flex-wrap items-center gap-6 text-xs">
               <a
                 href="https://botchain.ai"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gray-300 hover:text-white transition-colors flex items-center gap-1 font-medium"
+                className="text-gray-300 hover:text-white transition-colors flex items-center gap-1.5 font-medium"
               >
+                <img
+                  src="/botchain-logo.png"
+                  alt="BOT Chain Logo"
+                  className="w-3.5 h-3.5 rounded object-cover"
+                />
                 <span>BOT Chain Website</span>
                 <ExternalLink className="w-3 h-3 text-gray-500" />
               </a>
@@ -427,30 +422,33 @@ export default function Home() {
                 href="https://scan.botchain.ai"
                 target="_blank"
                 rel="noreferrer"
-                className="text-brand-green-light hover:text-white transition-colors flex items-center gap-1 font-medium"
+                className="text-brand-green-light hover:text-white transition-colors flex items-center gap-1.5 font-medium"
               >
+                <img
+                  src="/botchain-logo.png"
+                  alt="BOT Chain Logo"
+                  className="w-3.5 h-3.5 rounded object-cover"
+                />
                 <span>BOT Chain Explorer</span>
                 <ExternalLink className="w-3 h-3 text-gray-500" />
               </a>
 
-              {isContractConfigured && (
-                <a
-                  href={`https://scan.botchain.ai/address/${CONTRACT_ADDRESS}#code`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-brand-purple-light hover:text-white transition-colors flex items-center gap-1 font-mono text-[11px]"
-                >
-                  <span>Contract</span>
-                  <ExternalLink className="w-3 h-3 text-gray-500" />
-                </a>
-              )}
+              <a
+                href={`https://scan.botchain.ai/address/${CONTRACT_ADDRESS}#code`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-brand-purple-light hover:text-white transition-colors flex items-center gap-1 font-mono text-[11px]"
+              >
+                <span>Contract</span>
+                <ExternalLink className="w-3 h-3 text-gray-500" />
+              </a>
             </div>
           </div>
 
           <div className="border-t border-charcoal-800/80 pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-gray-500">
             <p>© 2026 SeatPick. Built natively on BOT Chain (Chain ID: 677).</p>
             <p className="font-mono text-[11px] text-gray-400">
-              Contract: {isContractConfigured ? CONTRACT_ADDRESS : "Not configured"}
+              Contract: {CONTRACT_ADDRESS}
             </p>
           </div>
         </div>
